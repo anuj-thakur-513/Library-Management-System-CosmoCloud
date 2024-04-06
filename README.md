@@ -6,6 +6,11 @@ A library management system built as an assignment for CosmoCloud
 
 https://github.com/anuj-thakur-513/Library-Management-System-CosmoCloud/assets/82753410/13a166bb-5c2b-4fc3-b8e6-225c44d4b0fe
 
+## Deployment
+
+If you want to use API endpoints, visit: [http://54.80.82.127/docs#/](http://54.80.82.127/docs#/)
+
+If you want to get data from API endpoints, use: [http://54.80.82.127:80](http://54.80.82.127:80)
 
 
 ## Run Locally
@@ -28,11 +33,6 @@ Install dependencies
   pip install -r requirements.txt
 ```
 
-Create .env file in root directory and add the mongoDB URI
-```
-Example URI: mongodb+srv://<username>:<password>@cluster0.ajg502t.mongodb.net/students
-```
-
 Start the server
 
 ```bash
@@ -40,6 +40,13 @@ Start the server
 ```
 
 To test API Endpoints, Visit: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variable to your .env file
+
+`MONGO_URI`
+
 
 ## API Reference
 
