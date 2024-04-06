@@ -12,7 +12,7 @@ https://github.com/anuj-thakur-513/Library-Management-System-CosmoCloud/assets/8
 
 If you want to use API endpoints, visit: [http://54.80.82.127/docs#/](http://54.80.82.127/docs#/)
 
-If you want to get data from API endpoints, use: [http://54.80.82.127:80](http://54.80.82.127:80)
+If you want to get data from API endpoints, use: [http://54.80.82.127](http://54.80.82.127)
 
 
 ## Run Locally
