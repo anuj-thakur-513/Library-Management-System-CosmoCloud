@@ -9,6 +9,9 @@ students = APIRouter()
 
 @students.post("/students")
 def create_student(student: Student):
+    # capitalize required data before insertion
+    student.address.city = student.address.city.capitalize()
+    student.address.country = student.address.country.capitalize()
     # convert student into student dump to insert into mongo
     student_dict = student.model_dump()
     inserted_student = studentsCollection.insert_one(student_dict)
