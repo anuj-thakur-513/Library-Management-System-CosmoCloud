@@ -29,7 +29,7 @@ def get_all_students(country: Optional[str] = Query(None), age: Optional[int] = 
     # construct find query as per country and age
     query = {}
     if country:
-        query["address.country"] = country 
+        query["address.country"] = country.capitalize() 
     
     if age is not None:
         query["age"] = {"$gte": age}
