@@ -71,4 +71,14 @@ def update_student(id: str, name: Optional[str] = Query(None), age: Optional[int
     if result.modified_count == 0:
         return HTTPException(status_code=404, detail="Student not found!")
     
-    return JSONResponse(content={}, status_code=204)
+    return JSONResponse(content=None, status_code=204)
+
+
+@students.delete("/students/{id}")
+def delete_student(id: str):
+    result = studentsCollection.delete_one({"_id": ObjectId(id)})
+    
+    if result.deleted_count == 0:
+        return HTTPException(status_code=404, detail="Student not found!")
+    
+    return JSONResponse(content={}, status_code=200)
