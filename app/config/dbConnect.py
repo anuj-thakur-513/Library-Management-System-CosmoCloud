@@ -2,7 +2,7 @@ from pymongo.mongo_client import MongoClient
 import os 
 from dotenv import load_dotenv, find_dotenv
 
-load_dotenv(find_dotenv("../.env"))
+load_dotenv(find_dotenv("../../.env"))
 
 uri = os.getenv("MONGO_URI")
 
