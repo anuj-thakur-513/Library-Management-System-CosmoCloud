@@ -28,6 +28,11 @@ Install dependencies
   pip install -r requirements.txt
 ```
 
+Create .env file in root directory and add the mongoDB URI
+```
+Example URI: mongodb+srv://<username>:<password>@cluster0.ajg502t.mongodb.net/students
+```
+
 Start the server
 
 ```bash
