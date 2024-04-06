@@ -4,7 +4,8 @@ A library management system built as an assignment for CosmoCloud
 
 ## Demo
 
-Insert gif or link to demo
+https://github.com/anuj-thakur-513/Library-Management-System-CosmoCloud/assets/82753410/c50e440d-b4b4-4336-9c17-c109477b4d5e
+
 
 ## Run Locally
 
