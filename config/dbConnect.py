@@ -8,6 +8,8 @@ uri = os.getenv("MONGO_URI")
 
 # Create a new client and connect to the server
 client = MongoClient(uri)
+db = client.library
+studentsCollection = db['students']
 
 # Send a ping to confirm a successful connection
 try:
