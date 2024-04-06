@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import JSONResponse
 from typing import Optional
+from bson import ObjectId
 from models.student import Student
 from config.dbConnect import studentsCollection
 
@@ -33,3 +34,13 @@ def get_students(country: Optional[str] = Query(None), age: Optional[int] = Quer
     students = list(result)
     
     return JSONResponse(content={"data": students}, status_code=200) 
+
+
+@students.get("/students/{id}")
+def get_student(id: str):
+    student = studentsCollection.find_one({"_id": ObjectId(id)}, {"_id": 0})
+    # check if the student was found or not
+    if student: 
+        return JSONResponse(content=student, status_code=200)
+    else:
+        return HTTPException(status_code=404, detail="Student not Found!")
