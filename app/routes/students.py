@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from typing import Optional
 from bson import ObjectId
 from app.models.student import Student
-from app.config.dbConnect import studentsCollection
+from app.config.db_connect import studentsCollection
 
 students = APIRouter()
 
