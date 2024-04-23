@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Header
 from fastapi.responses import JSONResponse
 from typing import Optional
 from bson import ObjectId
@@ -8,7 +8,10 @@ from app.config.db_connect import studentsCollection
 students = APIRouter()
 
 @students.post("/students")
-def create_student(student: Student):
+def create_student(
+    student: Student,
+    user_id: str = Header(..., description="User ID calling the API")
+):
     # capitalize required data before insertion
     student.address.city = student.address.city.capitalize()
     student.address.country = student.address.country.capitalize()
@@ -21,11 +24,15 @@ def create_student(student: Student):
         inserted_student_id = inserted_student.inserted_id
         return JSONResponse(content={"id": str(inserted_student_id)}, status_code=201)
     else:
-        raise HTTPException(status_code=500, detail="Failed to insert student into the database")
+        return HTTPException(status_code=500, detail="Failed to insert student into the database")
     
     
 @students.get("/students")
-def get_all_students(country: Optional[str] = Query(None), age: Optional[int] = Query(None)):
+def get_all_students(
+    country: Optional[str] = Query(None),
+    age: Optional[int] = Query(None), 
+    user_id: str = Header(..., description="User ID calling the API")
+):
     # construct find query as per country and age
     query = {}
     if country:
@@ -41,7 +48,10 @@ def get_all_students(country: Optional[str] = Query(None), age: Optional[int] = 
 
 
 @students.get("/students/{id}")
-def get_student(id: str):
+def get_student(
+    id: str,
+    user_id: str = Header(..., description="User ID calling the API")
+):
     student = studentsCollection.find_one({"_id": ObjectId(id)}, {"_id": 0})
     # check if the student was found or not
     if student: 
@@ -51,7 +61,14 @@ def get_student(id: str):
     
 
 @students.patch("/students/{id}")
-def update_student(id: str, name: Optional[str] = Query(None), age: Optional[int] = Query(None), city: Optional[str] = Query(None), country: Optional[str] = Query(None)):
+def update_student(
+    id: str,
+    name: Optional[str] = Query(None),
+    age: Optional[int] = Query(None),
+    city: Optional[str] = Query(None),
+    country: Optional[str] = Query(None),
+    user_id: str = Header(..., description="User ID calling the API")
+):
     if name is None and age is None and city is None and country is None:
         return HTTPException(status_code=400, detail="At least one of the field needs to be updated")
     
@@ -78,7 +95,10 @@ def update_student(id: str, name: Optional[str] = Query(None), age: Optional[int
 
 
 @students.delete("/students/{id}")
-def delete_student(id: str):
+def delete_student(
+    id: str,
+    user_id: str = Header(..., description="User ID calling the API")
+):
     result = studentsCollection.delete_one({"_id": ObjectId(id)})
     
     if result.deleted_count == 0:
